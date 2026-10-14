@@ -1,0 +1,353 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>스마트구몬 마이러닝 앱 설치 및 로그인</title><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Nanum+Pen+Script&display=swap" rel="stylesheet"><style>
+  :root{--ink:#F2F4F7;--brand:#E00020;--brand-deep:#AA0018;--brand-text:#FF6675;--sky:#1A1D23;--sky2:#3A222A;--paper:#0E1013;--surface:#262B34;--line:#3A404B;--muted:#A7AEB9;--gray:#9AA0A6;
+  /* ===== 폰트 스케일 토큰 (8개 페이지 공통 — 한 곳 수정 시 전 페이지 동기화) ===== */
+  --fs-3xs:11px;   /* 최소 단위: 배지·영상 표기 */
+  --fs-2xs:12px;   /* disclaimer·앱카드 설명 */
+  --fs-xs:13px;    /* eyebrow·QR 캡션·비교표 본문 */
+  --fs-sm:14px;    /* 탭·팁·아코디언 본문·부가설명 */
+  --fs-cap:15px;   /* 캡션·설명문 */
+  --fs-body:16px;  /* 본문 기본 */
+  --fs-md:17px;    /* 강조 본문·헤더 타이틀·CTA */
+  --fs-lg:18px;    /* 소제목 */
+  --fs-xl:20px;    /* 섹션 제목 */
+  --fs-2xl:23px;   /* 큰 강조문·수치 */
+  --fs-3xl:25px;   /* 섹션 헤드 h2 */
+  --fs-4xl:27px;   /* 하위 페이지 히어로 h1 */
+  --fs-5xl:30px;   /* index·Step01-01 히어로 h1 */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  /* 한글 줄바꿈 품질(2026-08-04): ①어절 중간에서 끊지 않음(keep-all — '데이/터', '단/계를' 방지)
+     ②마지막 줄에 한두 글자만 남는 '고아 줄' 방지(text-wrap:pretty — '…길러/요.' 방지)
+     ③단어가 칸보다 길 때만 예외적으로 끊음(overflow-wrap) — keep-all만 쓰면 좁은 칸에서 넘침 */
+  body{font-family:'Noto Sans KR',sans-serif;background:#08090B;color:var(--ink);-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word;text-wrap:pretty}
+  svg{display:block}
+  .shell{max-width:600px;margin:0 auto;background:var(--paper);min-height:100vh;position:relative;box-shadow:0 0 60px rgba(35,38,44,.06)}
+  .hdr{position:sticky;top:0;z-index:50;height:56px;display:grid;grid-template-columns:44px 1fr 44px;align-items:center;padding:0 12px;background:rgba(14,16,19,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .hdr a{color:var(--ink);text-decoration:none;display:flex;align-items:center;justify-content:center}
+  .hdr .title{text-align:center;font-size:var(--fs-md);font-weight:800;letter-spacing:-.02em}
+  .hdr .back{justify-self:center;width:44px;height:44px;border-radius:50%;background:var(--brand);color:#fff;box-shadow:0 2px 8px rgba(224,0,32,.22)}
+  .hero{padding:36px 24px 16px;container-type:inline-size}
+  .eyebrow{font-size:var(--fs-xs);font-weight:800;color:var(--brand-text);letter-spacing:.14em;margin-bottom:12px}
+  .hero h1{font-size:var(--fs-4xl);line-height:1.36;font-weight:900;letter-spacing:-.03em}
+  .hero .sub{margin-top:12px;font-size:var(--fs-body);line-height:1.7;color:var(--muted)}
+  /* 지정 줄바꿈(2줄) 고정 — 계수 17.4 = 첫 줄 실측 폭계수 16.76 + 여유 3.5% (§7-2) */
+  .hero .sub{font-size:min(var(--fs-body), calc(100cqw / 17.4))}
+  .tabs{position:sticky;top:56px;z-index:40;background:rgba(14,16,19,.96);backdrop-filter:blur(10px);padding:12px 16px;border-bottom:1px solid var(--line)}
+  .tabrow{display:flex;gap:6px;background:var(--sky);border-radius:14px;padding:5px}
+  .tab{position:relative;flex:1;border:none;background:transparent;font-family:inherit;font-size:var(--fs-sm);font-weight:800;color:var(--muted);padding:10px 6px;min-height:44px;border-radius:10px;cursor:pointer;transition:all .18s;letter-spacing:-.02em;line-height:1.2}
+  .tab.on{background:var(--brand);color:#fff;box-shadow:0 4px 12px rgba(224,0,32,.22)}
+  /* 탭 순서 번호(2026-08-06) — 어느 순서로 보면 되는지 한눈에 보이도록 좌상단에 배지를 얹는다.
+     data-n 값을 그대로 쓰므로 탭을 추가/삭제해도 마크업만 고치면 됨.
+     배지는 '자기 탭의 왼쪽 모서리'에만 걸치게 둔다(left:3px) — 왼쪽으로 튀어나오면 옆 탭에 붙은 것처럼 보임.
+     top:-13px 이라 2줄 라벨(글자 윗변)과도 겹치지 않는다(실측 간격 0~8px).
+     선택 = 흰 원 + 레드 숫자(5.87:1) / 미선택 = #626B7E 원 + 밝은 숫자(4.86:1) */
+  .tab::before{content:attr(data-n);position:absolute;left:3px;top:-13px;width:19px;height:19px;border-radius:50%;
+    background:#626B7E;border:1px solid #828B9D;color:var(--ink);font-size:var(--fs-2xs);font-weight:900;
+    display:flex;align-items:center;justify-content:center;line-height:1;box-shadow:0 2px 5px rgba(0,0,0,.35)}
+  .tab.on::before{background:#fff;border-color:#fff;color:var(--brand)}
+  .panel{display:none;padding:24px 20px 8px}
+  .panel.on{display:block}
+  .p-intro{font-size:var(--fs-body);line-height:1.7;color:var(--muted);margin:0 4px 18px}
+  .p-intro b{color:var(--ink);font-weight:800}
+  .p-intro.center{text-align:center}
+  /* step card */
+  .pstep{border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px;background:var(--surface);container-type:inline-size}
+  .sh{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .sn{flex-shrink:0;width:28px;height:28px;border-radius:8px;background:var(--brand);color:#fff;font-weight:900;font-size:var(--fs-cap);display:flex;align-items:center;justify-content:center}
+  .st{font-size:var(--fs-lg);font-weight:800;letter-spacing:-.02em}
+  /* 7번: 박스가 없는 중간 설명은 가운데 정렬 (박스형 .csnote/.tip/.alert 는 좌측 유지) */
+  .sdesc{font-size:var(--fs-cap);color:var(--muted);line-height:1.6;margin-bottom:14px;text-align:center}
+  .sdesc b{color:var(--ink);font-weight:800}
+  /* 지정 줄 수 고정(§7-2) — 계수는 실측값. 문구를 고치면 다시 측정할 것. */
+  .sdesc.oneline{font-size:clamp(10px,calc(100cqw / 21.8),var(--fs-cap))}      /* 1줄 */
+  .sdesc.twoline{font-size:clamp(10px,calc(100cqw / 23.9),var(--fs-cap))}         /* 2줄 */
+  /* link button + qr */
+  /* 폭은 세그먼트 토글 '버튼 바깥선'에 맞춤 — 성인 박스 왼쪽 끝 ~ 미성년자 박스 오른쪽 끝.
+     10px = 토글 트랙(.ostoggle) 좌우 패딩 5px×2. 아래 앱 영역도 같은 폭이라 세 요소가 정확히 정렬된다.
+     ⚠️ 이보다 좁히면 "너무 작다"는 피드백을 받았음(2026-08-06). 고정 px 상한으로 되돌리지 말 것 */
+  .lbtn{display:flex;align-items:center;justify-content:center;gap:8px;width:calc(100% - 10px);background:var(--brand);color:#fff;text-decoration:none;border-radius:12px;padding:14px;font-size:var(--fs-body);font-weight:800;margin:0 auto 14px}
+  .qr{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .qrbox{width:118px;height:118px;border:1px solid var(--line);border-radius:14px;display:flex;align-items:center;justify-content:center;background:#fff;padding:7px}
+  .qrimg{width:100%;height:100%;display:block;object-fit:contain}
+  .qr .qc{font-size:var(--fs-sm);color:var(--muted)}
+  /* ===== 세그먼트 토글(연령·OS 공통) =====
+     ⚠️ 구버전은 버튼이 투명(배경=트랙)이라 '어두운 바 하나'로 보여 눌러야 할 것이 안 보였음(사용자 지적).
+     이제 트랙(--sky)보다 밝은 면 + 테두리로 버튼 두 개가 각각 떠 보이게 한다.
+     background:transparent 로 되돌리지 말 것. */
+  .ostoggle{display:flex;gap:8px;background:var(--sky);border-radius:12px;padding:5px;margin-bottom:14px}
+  .ob{flex:1;border:1px solid #828B9D;background:#626B7E;font-family:inherit;font-size:var(--fs-sm);font-weight:800;color:var(--ink);padding:10px 6px;min-height:44px;border-radius:9px;cursor:pointer;transition:all .28s cubic-bezier(.22,.7,.3,1);line-height:1.35;box-shadow:0 2px 5px rgba(0,0,0,.3)}
+  .ob:active{transform:translateY(1px);box-shadow:0 1px 3px rgba(0,0,0,.3)}
+  /* 선택 결과는 '서서히' 나타나게(2026-08-06) — 즉시 튀어나오면 무엇이 바뀌었는지 알아채기 어렵다는 피드백.
+     JS 가 클릭할 때마다 .anim-in 을 뗐다 붙여 다시 재생시킨다(다른 쪽을 골랐을 때도 바뀐 걸 알 수 있게). */
+  @keyframes revealUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .anim-in{animation:revealUp .8s cubic-bezier(.22,.7,.3,1) both}
+  .anim-in.d1{animation-delay:.2s}
+  @media(prefers-reduced-motion:reduce){.anim-in{animation:none}}
+  .ob.on{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 3px 10px rgba(224,0,32,.38)}
+  /* ===== 선택 전에는 결과를 감춘다 (회원가입 연령 / 앱 설치 OS 공통) =====
+     ⚠️ 어느 쪽도 기본 선택을 두지 않는다 — 연령은 잘못 가입하면 비용이 크고(중·고등 타깃),
+     OS는 기본값이 있으면 '이미 내 기기에 맞다'고 오해한 채 다른 스토어로 감.
+     선택해야 .picked 가 붙어 결과가 나타난다. 기본 선택을 되살리지 말 것. */
+  .signup .lbtn,.signup .qr{display:none}
+  .signup.picked .lbtn{display:flex}
+  .signup.picked .qr{display:flex}
+  .appinstall .appbox,.appinstall .appgrid{display:none}
+  .appinstall.picked .appbox{display:block}
+  .appinstall.picked .appgrid{display:grid}
+  .picked .pickmsg{display:none}
+  .pickmsg{display:flex;align-items:center;justify-content:center;min-height:51px;margin:0 0 14px;padding:12px;border:1px dashed var(--line);border-radius:12px;background:var(--sky);color:var(--muted);line-height:1.5;text-align:center}
+  /* 1줄 고정 — 여백 26 = 좌우 패딩 24 + 테두리 2 */
+  .signup .pickmsg{font-size:clamp(9.5px,calc((100cqw - 26px) / 19.4),var(--fs-cap))}
+  .appinstall .pickmsg{font-size:clamp(8.5px,calc((100cqw - 26px) / 24.5),var(--fs-cap))}
+  /* screen placeholder */
+  .vimg{display:block;width:100%;max-width:260px;height:auto;margin:0 auto 14px;border-radius:14px;border:1px solid var(--line)}
+  .alert + .vimg{margin-top:16px}   /* 경고 박스와 회원인증 캡처가 붙어 보이던 것 보정 */
+  /* alert (red) */
+  .alert{display:flex;gap:10px;align-items:flex-start;background:#2A1319;border:1px solid #5A2029;border-left:4px solid var(--brand);border-radius:12px;padding:14px;margin-top:12px}
+  .alert svg{flex-shrink:0;margin-top:1px}
+  .alert .at{font-size:var(--fs-cap);font-weight:800;color:var(--brand-text);line-height:1.55}
+  /* ===== 지정된 줄바꿈이 유지되도록 '남는 폭 ÷ 문장 실측 폭계수'로 글자를 자동 축소 =====
+     계수 = (그 문장의 렌더 폭 ÷ 글자크기)에 안전여유 2%를 더한 값. 문구를 고치면 다시 측정할 것.
+     각 요소를 자기 자신의 컨테이너로 삼음(폭이 글자크기와 무관한 블록이라 순환 없음).
+     앞 줄은 컨테이너 쿼리 미지원 브라우저용 폴백. */
+  .alert .at.oneline{flex:1;font-size:var(--fs-sm);font-size:clamp(9.5px,calc((100cqw - 61px) / 19.3),var(--fs-cap))}
+  .csnote{font-size:var(--fs-cap);font-size:clamp(11px,calc((100cqw - 24px) / 18.1),var(--fs-cap));color:var(--muted);line-height:1.6;margin-top:10px;background:var(--sky);border-radius:10px;padding:12px}
+  .csnote b{color:var(--ink);font-weight:800}
+  .infonote{container-type:inline-size;font-size:var(--fs-cap);font-size:clamp(11px,calc(100cqw / 19),var(--fs-cap));color:var(--muted);line-height:1.7;text-align:center}
+  .infonote b{color:var(--ink);font-weight:800}
+  .infonote b.r{color:var(--brand-text)}                                  /* 빨간 강조 */
+  /* '·' 목록: 줄이 넘어가도 글머리표 아래가 아니라 글자에 맞춰 들여쓰기 */
+  .infonote .li{text-align:left;display:block;padding-left:11px;text-indent:-11px;font-size:var(--fs-sm);font-size:clamp(11px,calc(100cqw / 25.2),var(--fs-cap))}
+  .infonote .li::before{content:"· "}
+  .infonote .li+.li{margin-top:7px}
+  /* === 앱 설치 (이미지+QR+컬러 헤더) === */
+  .appbox{background:#333944;border:1px solid var(--line);border-radius:14px;overflow:hidden;width:calc(100% - 10px);margin:0 auto 10px}
+  .abh{font-size:var(--fs-body);font-weight:800;color:#fff;text-align:center;padding:10px}
+  .abh.main{background:#7E5BD1}.abh.uni{background:#8DC044;color:#16240A}.abh.lib{background:#F178AC;color:#2E0A1A}.abh.gyo{background:#F8D5FF;color:#4A1060}
+  /* 아이콘+QR을 한 행에 가운데, 설명은 그 아래 전체폭 가운데 정렬 */
+  .abbody{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:center;gap:10px 12px;padding:16px}
+  .abbody .orsep{align-self:center;margin-top:-14px}
+  /* 손글씨가 붙으면서 아이콘·QR 한 줄이 좁은 폭에서 안 들어감(390px 실측 필요폭 243 / 여유 253,
+     360px는 223뿐) → 370px 미만에서는 세로로 쌓는다. 억지로 한 줄에 밀어넣지 말 것. */
+  @media(max-width:369px){.abbody{flex-direction:column;gap:8px}.abbody .orsep{margin-top:0}}
+  .abimg{display:block;line-height:0}
+  .abimg img{width:84px;height:84px;border-radius:20px;display:block}
+  .abqr{width:84px;height:84px;border-radius:12px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:5px}
+  /* ===== 손글씨 안내(2026-08-06) =====
+     위 설명문("앱 이미지를 누르거나 QR 코드를 스캔")을 못 보고 지나치는 경우가 있어,
+     눌러야 할 것 바로 옆에 손글씨로 다시 표시한다. 글꼴 Nanum Pen Script(Google Fonts),
+     색 #FFD34D = 카드 배경 #333944 위에서 8.11:1. 돼지꼬리 화살표는 인라인 SVG. */
+  .hnote{display:flex;align-items:center;justify-content:center;gap:1px;margin-top:8px;
+         font-family:'Nanum Pen Script','Noto Sans KR',cursive;font-size:15px;line-height:1.1;
+         color:#FFD34D;white-space:nowrap;letter-spacing:0}
+  .hnote svg{width:18px;height:16px}
+  .hnote svg{flex-shrink:0;display:block}
+  .hnote.flip svg{transform:scaleX(-1)}
+  .orsep{font-family:'Nanum Pen Script','Noto Sans KR',cursive;font-size:16px;line-height:1;color:var(--muted);white-space:nowrap}
+  .pickcol{display:flex;flex-direction:column;align-items:center}
+  .abdesc{flex:1 0 100%;min-width:0;text-align:center;container-type:inline-size;font-size:var(--fs-body);font-size:clamp(11px,calc(100cqw / 13.6),var(--fs-body));color:var(--muted);line-height:1.55}
+  .abdesc b{color:var(--ink);font-weight:800}
+  /* 보조앱 카드: 3개를 항상 한 행에(3열 고정). 카드가 좁으므로 글씨는 한 단계 작게 */
+  .appgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:calc(100% - 10px);margin:0 auto}
+  .appcard{background:#333944;border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;padding-bottom:12px;container-type:inline-size}
+  /* 헤더가 1줄/2줄이어도 카드끼리 높이가 어긋나지 않도록 2줄분 높이를 항상 확보 */
+  .appcard .abh{width:100%;font-size:var(--fs-xs);padding:6px 4px;display:flex;align-items:center;justify-content:center;min-height:calc(var(--fs-xs) * 2.5 + 12px);line-height:1.25;word-break:keep-all}
+  .appcard .abimg.sm img{width:66px;height:66px;border-radius:15px;margin:12px auto 8px}
+  /* 3열 보조앱: 지정 줄바꿈(2줄)이 유지되도록 카드 폭에 비례해 축소 */
+  .abdesc.sm{font-size:var(--fs-2xs);font-size:clamp(9px,calc((100cqw - 6px) / 8.1),var(--fs-xs));line-height:1.45;padding:0 3px;flex:1;min-width:0;width:100%;color:var(--muted);word-break:normal}
+  .abqr.sm{width:66px;height:66px;margin-top:8px;border-radius:11px;padding:4px}
+  /* 320px대는 카드가 88px로 더 좁아 한 단계 더 축소(3열은 유지) */
+  @media(max-width:359px){
+    .appcard .abh{font-size:var(--fs-2xs);min-height:calc(var(--fs-2xs) * 2.5 + 12px)}
+    .appcard .abimg.sm img{width:56px;height:56px;border-radius:13px;margin:10px auto 7px}
+    .abdesc.sm{line-height:1.4}   /* font-size는 위 clamp가 카드 폭에 맞춰 이미 처리 */
+    .abqr.sm{width:58px;height:58px;border-radius:10px}
+  }
+  /* === 섹션 머리(A/B)·아코디언 === */
+  .mh{display:flex;align-items:center;gap:10px;margin:8px 4px 14px}
+  .mn{flex-shrink:0;width:26px;height:26px;border-radius:8px;background:var(--brand);color:#fff;font-weight:900;font-size:var(--fs-cap);display:flex;align-items:center;justify-content:center}
+  .mh h2{font-size:var(--fs-xl);font-weight:900;letter-spacing:-.02em}
+  .divider{height:1px;background:var(--line);margin:26px 0 24px}
+  .tip{display:flex;gap:9px;align-items:flex-start;background:var(--sky);border-radius:11px;padding:12px;margin-top:14px}
+  .tip .tl{flex-shrink:0;font-size:var(--fs-2xs);font-weight:900;color:#fff;background:var(--brand);border-radius:6px;padding:3px 7px}
+  .tip p{font-size:var(--fs-cap);color:var(--muted);line-height:1.55}
+  /* accordion */
+  .acc{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden;background:var(--surface)}
+  .acc[open]{border-color:var(--brand-text)}
+  summary{list-style:none;display:flex;align-items:center;gap:11px;padding:15px 16px;cursor:pointer}
+  summary::-webkit-details-marker{display:none}
+  summary .an2{flex-shrink:0;width:26px;height:26px;border-radius:8px;background:var(--brand);color:#fff;font-weight:900;font-size:var(--fs-sm);display:flex;align-items:center;justify-content:center}
+  summary .at2{font-size:var(--fs-body);font-weight:800;flex:1;letter-spacing:-.02em}
+  summary .chev{transition:transform .2s;color:var(--muted)}
+  .acc[open] summary .chev{transform:rotate(180deg)}
+  .acc-b{padding:2px 16px 16px}
+  .acc-b .bd{font-size:var(--fs-cap);color:var(--muted);line-height:1.55;margin-bottom:8px}
+  .acc-b .sub{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line)}
+  .acc-b .sub .sno{flex-shrink:0;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--brand);color:var(--brand-text);font-weight:800;font-size:var(--fs-xs);display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .acc-b .sub .sx h5{font-size:var(--fs-cap);font-weight:800;margin-bottom:1px}
+  .acc-b .sub .sx p{font-size:var(--fs-cap);color:var(--muted);line-height:1.5}
+  .acc-img{width:100%;height:auto;display:block;border-radius:10px}
+  .acc-img+.acc-img{margin-top:8px}
+  /* 자학자습 튜토리얼 임베드 — 스테이지 비율(1615/2600) 유지, 화면(헤더56+탭+여유 제외) 안에 통째로 들어가는 최대 크기 */
+  /* 3단 폴백: ①100vh(구형) ②100dvh(모던) ③--vh(JS 실측, 최우선) — 주소창 때문에 잘리는 것 방지 */
+  .tutorial-embed{width:min(100%,calc((100vh - 196px)*.6212));width:min(100%,calc((100dvh - 196px)*.6212));width:min(100%,calc((var(--vh,100dvh) - 196px)*.6212));margin:0 auto 16px;aspect-ratio:1615/2600;overflow:hidden;background:#0E1013;border-radius:12px}
+  .tutorial-embed iframe{width:100%;height:100%;border:0;display:block;overflow:hidden}
+  /* 탭을 처음 열 때 픽셀폰트가 바뀌며 '덜 그려진 화면'이 스치던 것을 가린다.
+     display:none → block 이라 transition 은 안 걸리므로 animation 을 쓴다(2026-08-06). */
+  @keyframes tutFade{from{opacity:0}to{opacity:1}}
+  .panel.on .tutorial-embed{animation:tutFade .45s ease both}
+  @media(prefers-reduced-motion:reduce){.panel.on .tutorial-embed{animation:none}}
+
+
+html,body{height:auto;min-height:0}
+.shell{max-width:960px;min-height:0;box-shadow:none}
+.panel.on{display:block;padding:24px 20px 8px}
+:root{color-scheme:light;--ink:#222;--paper:#fff;--surface:#fff;--sky:#F7F7F7;--sky2:#FFF0F2;--line:#DDD;--muted:#666;--brand-text:#C9001D}
+body{background:#fff}.pstep{border-radius:4px}
+.ob,.ab[data-age]{background:#F3F3F3;border-color:#CCC;color:#333}
+.ob.on,.ab.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.appbox,.appcard{background:#FAFAFA}.hnote{color:#9B6700}
+.alert{background:#FFF5F6;border-color:#E9C9CE;border-left-color:var(--brand)}
+.login-notice .li{font-size:var(--fs-sm)}
+@media(min-width:900px){.login-notice .li{font-size:var(--fs-cap);white-space:nowrap}}
+@media(min-width:700px){.panel.on{padding:32px 36px 16px}.pstep{padding:28px;margin-bottom:20px}.abbody{padding:24px}.vimg{max-width:320px}}
+</style></head><body><div class="shell"><section class="panel on" data-p="prep">
+    <p class="p-intro center"><b>스마트구몬 마이러닝</b> 이용을 시작하려면,<br>아래 4단계를 순서대로 진행해 주세요.</p>
+
+    <div class="pstep">
+      <div class="sh"><span class="sn">1</span><span class="st">회원가입 안내</span></div>
+      <p class="sdesc oneline">학습자 연령을 선택하고, 회원가입을 진행해주세요.</p>
+      <div class="signup">
+        <div class="ostoggle"><button class="ob ab" data-age="adult">성인<br>(만 18세 이상)</button><button class="ob ab" data-age="minor">미성년자<br>(만 18세 미만)</button></div>
+        <p class="pickmsg">선택하시면 가입 버튼과 QR 코드가 나옵니다.</p>
+        <a class="lbtn" href="#" target="_blank" rel="noopener">회원가입 바로가기<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="qr"><div class="qrbox"><img class="qrimg" src="img/qr-signup.svg" alt="회원가입 QR 코드" loading="lazy"></div></div>
+      </div>
+    </div>
+
+    <div class="pstep">
+      <div class="sh"><span class="sn">2</span><span class="st">앱 설치</span></div>
+      <p class="sdesc twoline">사용할 기기에 맞는 앱을 선택하고,<br><b>앱 이미지</b>를 누르거나 <b>QR 코드</b>를 스캔해 설치해 주세요.</p>
+      <div class="appinstall">
+        <div class="ostoggle"><button class="ob" data-os="aos">Play 스토어<br>(안드로이드)</button><button class="ob" data-os="ios">앱 스토어<br>(iOS)</button></div>
+        <p class="pickmsg">선택하시면 기기에 맞는 앱 이미지와 QR코드가 나옵니다.</p>
+        <div class="appbox">
+          <div class="abh main">스마트구몬N 학습</div>
+          <div class="abbody">
+            <div class="pickcol">
+              <a class="abimg" data-app="smartkumonn" href="#" target="_blank" rel="noopener"><img src="img/smartkumonn.png" alt="스마트구몬N 학습앱" loading="lazy"></a>
+              <div class="hnote"><svg width="21" height="19" viewBox="0 0 34 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M31 27c-9 1-17-3-18-9-.6-4 3-6 5-4s-1 6-5 5C8 18 8 11 8 3"/><path d="M4.5 7.5 8 3l3.5 4.5"/></svg>아이콘 클릭</div>
+            </div>
+            <div class="orsep">또는</div>
+            <div class="pickcol">
+              <div class="abqr"><img class="qrimg" alt="앱 설치 QR 코드" loading="lazy"></div>
+              <div class="hnote flip">QR코드 스캔<svg width="21" height="19" viewBox="0 0 34 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M31 27c-9 1-17-3-18-9-.6-4 3-6 5-4s-1 6-5 5C8 18 8 11 8 3"/><path d="M4.5 7.5 8 3l3.5 4.5"/></svg></div>
+            </div>
+            <p class="abdesc">교재풀이 등<br><b>학습은 모두 이 앱</b>으로 진행해요.</p>
+          </div>
+        </div>
+        <div class="appgrid">
+          <div class="appcard">
+            <div class="abh uni">유니버스</div>
+            <a class="abimg sm" data-app="universe" href="#" target="_blank" rel="noopener"><img src="img/universe.png" alt="유니버스앱" loading="lazy"></a>
+            <p class="abdesc sm">학습보상으로<br>나만의 우주 만들기</p>
+            <div class="abqr sm"><img class="qrimg" alt="앱 설치 QR 코드" loading="lazy"></div>
+          </div>
+          <div class="appcard">
+            <div class="abh lib">라이브러리</div>
+            <a class="abimg sm" data-app="library" href="#" target="_blank" rel="noopener"><img src="img/library.png" alt="라이브러리앱" loading="lazy"></a>
+            <p class="abdesc sm">디지털 도서·영상<br>콘텐츠 제공</p>
+            <div class="abqr sm"><img class="qrimg" alt="앱 설치 QR 코드" loading="lazy"></div>
+          </div>
+          <div class="appcard">
+            <div class="abh gyo">교과100 중등</div>
+            <a class="abimg sm" data-app="gyogwa100" href="#" target="_blank" rel="noopener"><img src="img/gyogwa100.png" alt="교과100 중등 앱" loading="lazy"></a>
+            <p class="abdesc sm">중등 내신 대비<br>학습 앱</p>
+            <div class="abqr sm"><img class="qrimg" alt="앱 설치 QR 코드" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pstep">
+      <div class="sh"><span class="sn">3</span><span class="st">회원인증</span></div>
+      <div class="alert"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E00020" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg><div class="at oneline">계약 다음 날부터 회원인증을 진행할 수 있어요.</div></div>
+      <img class="vimg" src="img/membership_verify.jpg" alt="회원인증 — 첫 로그인 화면" loading="lazy">
+      <p class="infonote">첫 로그인 시 나타나는 화면에서<br><b>안내받은 회원번호</b>를 입력해 인증해 주세요.</p>
+      <div class="csnote">회원가입이 안될 경우<br>고객센터(<b>1588-5566</b>)으로 연락해주세요.<br>(연결 후 <b>0번</b> 입력 시 상담사와 연결됩니다.)</div>
+    </div>
+
+    <div class="pstep">
+      <div class="sh"><span class="sn">4</span><span class="st">로그인 안내</span></div><p class="infonote login-notice"><span class="li">다음 달에 학습을 시작한다면, 이번 달 24일부터 로그인할 수 있어요.</span><span class="li"><b class="r">당월 학습 시작</b>으로 신청하신 경우에도, <b class="r">회원인증 및 로그인</b>은 <b class="r">다음날부터 가능</b>해요.</span><span class="li">교재는 선생님이 학습할 교재를 지정한 후에 표시돼요. 교재가 보이지 않으면 담당 선생님께 확인해 주세요.</span></p>
+    </div>
+
+  </section></div><script>const LINKS={
+    smartkumonn:{aos:'https://play.google.com/store/apps/details?id=com.kumon.apps.ict.student.n',ios:'https://apps.apple.com/kr/app/%EC%8A%A4%EB%A7%88%ED%8A%B8%EA%B5%AC%EB%AA%ACn-%ED%95%99%EC%8A%B5/id6480479508'},
+    universe:{aos:'https://play.google.com/store/apps/details?id=com.kumon.universe',ios:'https://apps.apple.com/kr/app/%EC%8A%A4%EB%A7%88%ED%8A%B8%EA%B5%AC%EB%AA%ACn-%EC%9C%A0%EB%8B%88%EB%B2%84%EC%8A%A4/id6470173046'},
+    library:{aos:'https://play.google.com/store/apps/details?id=com.kyowon.kumon.freepass',ios:'https://apps.apple.com/kr/app/%EC%8A%A4%EB%A7%88%ED%8A%B8%EA%B5%AC%EB%AA%ACn-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC/id6469672674'},
+    gyogwa100:{aos:'https://play.google.com/store/apps/details?id=kr.co.kumon.newchallenge100middle',ios:'https://apps.apple.com/kr/app/%EA%B5%90%EA%B3%BC100-%EC%A4%91%EB%93%B1/id6749213517'}
+  };
+  const NAMES={};
+  function applyOS(box,os){
+    box.querySelectorAll('.abimg[data-app]').forEach(a=>{
+      const app=a.dataset.app,L=LINKS[app];if(!L)return;
+      a.href=L[os];
+      const card=a.closest('.appcard,.appbox');
+      const qr=card&&card.querySelector('.qrimg');if(qr)qr.src='img/qr-'+app+'-'+os+'.svg';
+      if(NAMES[app]){const h=card&&card.querySelector('.abh');if(h)h.textContent=NAMES[app][os];}
+    });
+  }
+  /* 클릭할 때마다 등장 애니메이션을 다시 재생 — 클래스를 뗀 뒤 강제 리플로우(offsetWidth)를 거쳐야 다시 걸린다 */
+  const replay=(el,delayed)=>{if(!el)return;el.classList.remove('anim-in','d1');void el.offsetWidth;
+    el.classList.add('anim-in');if(delayed)el.classList.add('d1');};
+  /* 선택 전에는 앱 카드가 display:none 이라 lazy 이미지가 다운로드되지 않는다.
+     그래서 클릭 직후 이미지를 받느라 버벅였음 → 페이지 로드 후 조용히 미리 받아 캐시에 넣어 둔다.
+     (아이콘·양쪽 OS QR·회원가입 QR 전부. 지우면 첫 클릭 때 다시 버벅임) */
+  const warm=()=>{const urls=[];
+    document.querySelectorAll('.appinstall .abimg[data-app] img').forEach(i=>urls.push(i.getAttribute('src')));
+    Object.keys(LINKS).forEach(app=>{urls.push('img/qr-'+app+'-aos.svg','img/qr-'+app+'-ios.svg')});
+    if(typeof SIGNUP!=='undefined')Object.keys(SIGNUP).forEach(k=>urls.push(SIGNUP[k].qr));
+    urls.filter(Boolean).forEach(u=>{const im=new Image();im.decoding='async';im.src=u});
+    /* ⚠️ 손글씨(Nanum Pen Script)도 미리 받아 둔다 — .hnote 는 선택 전까지 display:none 안에 있어
+       폰트 요청이 아예 안 걸린다. 그대로 두면 클릭 순간 대체 글꼴(폭이 1.5배)로 먼저 그려졌다가
+       폰트가 도착하면서 라벨 폭이 92→61px 로 줄어 '툭 튀는' 것처럼 보였음(실측). 지우지 말 것. */
+    if(document.fonts&&document.fonts.load){
+      try{ document.fonts.load('15px "Nanum Pen Script"','아이콘 클릭 QR코드 스캔') }catch(e){}
+    }
+    };
+  if(document.readyState==='complete')setTimeout(warm,150);
+  else addEventListener('load',()=>setTimeout(warm,150));
+  document.querySelectorAll('.appinstall').forEach(box=>{
+    /* 기본 선택 없음 — 눌러야 .picked 가 붙어 앱·QR이 나타난다(회원가입 연령 분기와 같은 규칙) */
+    box.querySelectorAll('.ob').forEach(b=>b.addEventListener('click',()=>{
+      box.querySelectorAll('.ob').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+      const os=b.dataset.os;
+      box.classList.toggle('os-ios',os==='ios');
+      box.classList.toggle('os-aos',os==='aos');
+      applyOS(box,os);
+      box.classList.add('picked');
+      replay(box.querySelector('.appbox'));
+      replay(box.querySelector('.appgrid'),!!box.querySelector('.appbox'));
+      replay(box.querySelector('.appgrid2'));
+    }));
+  });
+  // 회원가입 연령 분기 — 성인/미성년자 가입 주소가 다르다. 기본 선택을 두지 않고,
+  // 선택해야 버튼(href)과 QR이 채워진다(.picked). 되돌려서 기본값을 두지 말 것.
+  const SIGNUP={
+    adult:{url:'https://membership.allng.com/openapi/membership/signup/terms.html?signType=new&certUIType=SELF&loginUserInfo=&userJoinPath=&serviceNo=kumon_talk',qr:'img/qr-signup.svg',label:'성인'},
+    minor:{url:'https://membership.allng.com/openapi/membership/childSignup/childTerms.html?signType=new&certUIType=SELF&loginUserInfo=&userJoinPath=&serviceNo=kumon_talk',qr:'img/qr-signup-minor.svg',label:'미성년자'}
+  };
+  document.querySelectorAll('.signup').forEach(box=>{
+    box.querySelectorAll('.ab[data-age]').forEach(b=>b.addEventListener('click',()=>{
+      const S=SIGNUP[b.dataset.age];if(!S)return;
+      box.querySelectorAll('.ab').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+      const a=box.querySelector('.lbtn');if(a)a.href=S.url;
+      const q=box.querySelector('.qr .qrimg');if(q){q.src=S.qr;q.alt=S.label+' 회원가입 QR 코드';}
+      box.classList.add('picked');
+      replay(a); replay(box.querySelector('.qr'),true);
+    }));
+  });
+  
+
+
+</script></body></html>

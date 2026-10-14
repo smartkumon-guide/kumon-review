@@ -1,0 +1,104 @@
+[
+  {
+    "id": "guide-smartkumonn",
+    "group": "guide",
+    "title": "스마트구몬N",
+    "label": "스마트구몬N 이용 안내",
+    "path": "products/smartkumonn.html",
+    "version": "2026-10-12",
+    "active": true
+  },
+  {
+    "id": "prep-smartkumonn",
+    "group": "prep",
+    "title": "스마트구몬N",
+    "label": "스마트구몬N · 앱 설치 및 로그인",
+    "path": "prep/smartkumonn.html",
+    "version": "2026-10-12",
+    "active": true
+  },
+  {
+    "id": "guide-wings",
+    "group": "guide",
+    "title": "스마트구몬 WINGS",
+    "label": "스마트구몬 WINGS 이용 안내",
+    "path": "products/wings.html",
+    "version": "2026-10-12",
+    "active": true
+  },
+  {
+    "id": "prep-wings",
+    "group": "prep",
+    "title": "스마트구몬 WINGS",
+    "label": "스마트구몬 WINGS · 앱 설치 및 로그인",
+    "path": "prep/wings.html",
+    "version": "2026-10-12",
+    "active": true
+  },
+  {
+    "id": "guide-mylearning",
+    "group": "guide",
+    "title": "스마트구몬 마이러닝",
+    "label": "스마트구몬 마이러닝 이용 안내",
+    "path": "products/mylearning.html",
+    "version": "2026-10-12",
+    "active": true
+  },
+  {
+    "id": "prep-mylearning",
+    "group": "prep",
+    "title": "스마트구몬 마이러닝",
+    "label": "스마트구몬 마이러닝 · 앱 설치 및 로그인",
+    "path": "prep/mylearning.html",
+    "version": "2026-10-12",
+    "active": true
+  },
+  {
+    "id": "guide-smile",
+    "group": "guide",
+    "title": "스마일(성인)화상 학습",
+    "label": "스마일(성인)화상 학습 이용 안내",
+    "path": "products/smile.html",
+    "version": "2026-10-12",
+    "active": true
+  },
+  {
+    "id": "prep-smile",
+    "group": "prep",
+    "title": "스마일(성인)화상 학습",
+    "label": "스마일(성인)화상 학습 · 앱 설치 및 로그인",
+    "path": "prep/smile.html",
+    "version": "2026-10-12",
+    "active": true
+  },
+  {
+    "id": "tutorial-skn",
+    "group": "tutorial",
+    "title": "스마트구몬N 알아보기",
+    "label": "스마트구몬N · 스마트구몬N 알아보기",
+    "path": "tutorials/skn/index.html",
+    "version": "v32",
+    "active": true,
+    "note": "홈페이지 상품 소개에도 같은 주소로 연결"
+  },
+  {
+    "id": "tutorial-class",
+    "group": "tutorial",
+    "title": "화상수업 입장 방법",
+    "label": "스마트구몬N · 화상수업 입장 방법",
+    "path": "tutorials/class/index.html",
+    "version": "v2",
+    "active": true,
+    "note": ""
+  },
+  {
+    "id": "tutorial-smile",
+    "group": "tutorial",
+    "title": "수업 일정 및 앱 이용방법",
+    "label": "스마일(성인)화상 · 수업 일정 및 앱 이용방법",
+    "path": "tutorials/smile/index.html",
+    "version": "v12",
+    "active": true,
+    "note": ""
+  }
+]
