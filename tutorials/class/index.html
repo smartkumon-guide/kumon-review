@@ -1,0 +1,244 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>스마트구몬 WINGS · 화상수업 입장 방법</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#FFC4E5;--purple:#8962FF;--yellow:#FFE132;--ink:#302B43;--muted:#62576F;--fs-body:16px;--fs-small:13px;--fs-heading:24px;--fs-title:36px}
+*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:var(--pink);color:var(--ink);font-family:'Noto Sans KR',Arial,sans-serif;word-break:keep-all;overflow-wrap:anywhere}
+body:before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 16% 22%,#F0AAF477 0 9%,transparent 10%),radial-gradient(circle at 85% 32%,#BAA7FF44 0 8%,transparent 9%),linear-gradient(0deg,#F87DCD 0,transparent 24%);pointer-events:none}
+button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}button:focus-visible,summary:focus-visible{outline:3px solid #302B43;outline-offset:4px}button:disabled{opacity:.4;cursor:default}
+.header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 26px;max-width:1200px;margin:auto}.brand{width:142px;height:50px;object-fit:contain}.header-tools{display:flex;gap:8px}.header-tools button{min-height:44px;border:1px solid #FFFFFFCC;border-radius:24px;background:#FFFFFF99;padding:8px 16px;font-size:var(--fs-small);font-weight:700}
+main{max-width:760px;margin:auto;padding:0 16px 28px}.scene-title{margin:0 0 12px;text-align:center;font-size:var(--fs-heading);font-weight:800}.scene-meta{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;font-size:var(--fs-small)}.scope,.time-tag{background:#FFFFFFBA;border-radius:24px;padding:5px 12px}.time-tag{background:var(--purple);color:white}
+.tablet{position:relative;margin:auto;width:min(420px,calc(100% - 32px));padding:12px 9px 14px;border-radius:28px;background:var(--purple);box-shadow:0 8px 0 #6852C3,0 16px 35px #98578444;border:2px solid #A88BFF}
+.tablet:before{content:'';position:absolute;left:34%;top:0;width:32%;height:11px;background:#302B43;border-radius:0 0 14px 14px;z-index:3}.screen{position:relative;aspect-ratio:1615/2600;background:#FAF8FC;border:5px solid #302B43;border-radius:18px;overflow:hidden;isolation:isolate}.screen-image{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:fill}.screen-image[hidden]{display:none}.empty-capture{position:absolute;inset:7%;border:1px dashed #BFB4D4;border-radius:14px;background:#F7F4FC}.inset{position:absolute;object-fit:contain;pointer-events:none}.inset.framed{object-fit:cover;border:3px solid #FFFFFF;box-shadow:0 3px 15px #302B4344}
+.hotspot,.read-highlight{position:absolute;border:3px solid #F14952;background:#FF4D4F25;border-radius:8px;padding:0;z-index:4}.hotspot:before{content:'';position:absolute;inset:-10px}.hotspot{animation:pulse 1.2s ease-in-out infinite}.read-highlight{pointer-events:none}.finger{position:absolute;width:15%;aspect-ratio:94/108;background:url('assets/onstudy-img_hand.png') center/contain no-repeat;z-index:5;pointer-events:none;animation:hand 1s ease-in-out infinite;transform:translate(-25%,15%)}
+.record-indicator{position:absolute;left:74.6%;top:4%;width:3.5%;aspect-ratio:1;border-radius:50%;background:#8A8A8A;border:2px solid #DDD;pointer-events:none;z-index:3}.record-indicator.active{background:#EB3544;border-color:#EB3544}
+.writing{position:absolute;inset:0;pointer-events:none;animation:writeReveal 3s steps(8,end) both;background:url('assets/screen-solving_go.jpg') center/100% 100% no-repeat;z-index:2}
+.speech-wrap{position:relative;margin:84px auto 14px;width:min(600px,100%)}.mascot-peek{position:absolute;bottom:calc(100% - 8px);left:0;width:110px;aspect-ratio:174/160;overflow:hidden;pointer-events:none}.mascot-peek img{display:block;width:348.28%;max-width:none}
+.speech{position:relative;display:block;width:100%;min-height:112px;padding:22px 48px 24px 24px;background:var(--yellow);border:0;border-radius:0 0 28px 28px;box-shadow:0 7px 0 #EACE20;text-align:left;font-size:clamp(16px,2.5vw,20px);line-height:1.65;font-weight:600;color:var(--ink)}.speech[aria-disabled="true"]{cursor:default}.speech-arrow{position:absolute;right:18px;bottom:18px;font-size:30px;font-weight:800}.speech[hidden]{display:none}
+.scene-status{text-align:center;font-size:var(--fs-small);color:var(--muted);min-height:24px;margin:14px 0 8px}.pager{display:flex;justify-content:center;gap:14px;max-width:440px;margin:14px auto 0}.pager button{min-height:48px;flex:1;border:2px solid var(--purple);border-radius:12px;background:#FFFFFFC9;color:#6650BF;padding:10px 20px;font-weight:700}.pager .next{background:var(--purple);color:white}
+.hero{text-align:center;padding:18px 0 0}.hero h1{font-size:clamp(28px,5vw,42px);line-height:1.3;color:#5744A6;margin:10px 0 16px}.hero-character{width:180px;aspect-ratio:174/160;overflow:hidden;margin:auto}.hero-character img{display:block;width:348.28%;max-width:none}
+.cloud{position:relative;width:min(610px,100%);height:320px;background:url('assets/onstudy-img_intro_bubble.png') center/100% 100% no-repeat;margin:0 auto}.cloud-mask{position:absolute;left:15.4%;right:9.4%;top:31%;bottom:25%;background:var(--yellow);pointer-events:none}.cloud-content{position:absolute;inset:25% 11% 9%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:var(--ink);font-size:clamp(17px,2.5vw,22px);line-height:1.6;font-weight:600}.cloud-text{margin:0}.cloud-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.cloud-actions button{min-height:48px;border:0;border-radius:12px;background:var(--purple);color:white;font-weight:700;font-size:var(--fs-body);padding:12px 22px}.cloud-actions .secondary{background:#FFFFFFE6;color:#6551BA}.hero-next{border:0;background:transparent;min-height:44px;font-weight:800;color:#6651B8;padding:4px 14px;font-size:28px}
+dialog{width:min(660px,calc(100% - 32px));max-height:85dvh;border:2px solid #A187F7;border-radius:20px;background:#FFF9FD;color:var(--ink);padding:24px;line-height:1.7}dialog::backdrop{background:#302B4377}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}dialog h2{margin:0;font-size:var(--fs-heading)}.close{min-height:44px;padding:8px 14px;background:#EDE5FF;border:0;border-radius:10px}.chapter-list{display:grid;gap:8px}.chapter-list button{min-height:48px;padding:10px 16px;text-align:left;border:1px solid #D8C9F5;background:white;border-radius:10px;font-weight:600}
+@keyframes pulse{50%{background:#FF4D4F55}}@keyframes hand{50%{transform:translate(-25%,6%)}}@keyframes writeReveal{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0)}}
+@media(max-width:480px){.header{padding:12px 16px}.brand{width:110px;height:40px}.header-tools button{padding:7px 10px}main{padding:0 12px 20px}.scene-title{font-size:20px}.tablet{width:calc(100% - 28px);padding:10px 7px;border-radius:22px}.screen{border-width:4px;border-radius:12px}.speech-wrap{margin-top:72px}.mascot-peek{width:96px}.speech{padding:18px 38px 20px 18px;font-size:16px}.cloud{height:365px}.cloud-content{inset:25% 12% 8%;font-size:17px;gap:14px}.cloud-actions{flex-direction:column;width:100%}.cloud-actions button{padding:10px 12px}.hero-character{width:150px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* The frame stays in place; only the app capture and overlapping guide change. */
+.header{padding:10px 20px}.brand{height:40px}main{max-width:760px;padding-top:8px}.scene-title{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.scene-meta{position:absolute;left:12px;right:12px;bottom:8px;margin:0;z-index:6;pointer-events:none}.scope,.time-tag{font-size:11px;padding:3px 8px}.tutorial-frame{position:relative;width:min(420px,100%);margin:auto}.tablet{width:100%;padding:48px 9px 14px}.tablet:before{display:none}.step-nav{position:absolute;top:0;left:8px;right:8px;display:grid;grid-template-columns:44px minmax(60px,1fr) 44px 60px;align-items:center;height:48px;z-index:7;background:var(--purple);border-radius:0 0 22px 22px;color:white}.step-nav button{min-width:0;min-height:44px;background:transparent;border:0;padding:0;font-size:12px;font-weight:700;color:white}.step-nav .step-arrow{font-size:23px}.step-count{text-align:center;white-space:nowrap;font-size:14px;font-weight:700}.speech-wrap{width:100%;margin:-32px 0 14px;z-index:8}.speech{min-height:112px}.mascot-peek{width:96px}.hero{position:relative;padding:0;margin:-150px 0 14px;z-index:8}.cloud{width:100%;height:300px}.hero-character{position:absolute;left:0;bottom:calc(100% - 98px);width:100px;margin:0;z-index:1}.cloud-content{inset:27% 11% 9%;font-size:17px;gap:12px}.cloud-actions button{font-size:14px;padding:10px 14px}.scene-status{margin-top:14px}.screen{position:relative}.tablet .scene-meta{bottom:18px}.cloud-actions{flex-direction:row;width:auto}
+@media(max-width:480px){.header{padding:8px 12px}.brand{height:34px}.tablet{width:100%;padding:48px 7px 12px}.step-nav{left:6px;right:6px}.speech-wrap{margin-top:-28px}.cloud{height:330px}.hero{margin-top:-150px}.cloud-content{font-size:16px;inset:27% 11% 8%}.hero-character{width:90px}.cloud-actions{gap:8px}.cloud-actions button{padding:10px 12px}.mascot-peek{width:86px}}
+.tutorial-frame{padding-bottom:260px;overflow-anchor:none}.speech-wrap{position:absolute;top:calc(100% - 292px);left:0;margin:0}.hero{position:absolute;left:0;right:0;bottom:260px;margin:0}.previous-image{z-index:1;pointer-events:none;opacity:0}.speech-arrow{display:grid;place-items:center;right:10px;bottom:12px;width:44px;height:44px;border-radius:50%;background:#8962FF;color:white;animation:arrowNudge 1.25s ease-in-out infinite}.hotspot{animation:guideIn .65s .3s both,pulse 1.4s .95s infinite}.finger{animation:guideIn .65s .45s both,hand 1.25s 1.1s infinite}.read-highlight{animation:guideIn .65s .3s both}.inset{animation:guideIn .6s both}
+@keyframes guideIn{from{opacity:0}to{opacity:1}}@keyframes submitPulse{0%,100%{opacity:.25;background:#FF4D4F25}50%{opacity:1;background:#FF4D4F70}}@keyframes vanish{to{opacity:0;visibility:hidden}}@keyframes arrowNudge{50%{transform:translateX(4px);box-shadow:0 0 0 5px #8962FF25}}
+@media(max-width:480px){.speech-wrap{top:calc(100% - 288px);margin:0}.hero{margin:0}}
+@media(prefers-reduced-motion:reduce){}
+.answer-cover{position:absolute;left:49%;top:24%;width:16%;height:73%;background:white;z-index:2;pointer-events:none}.writing{z-index:3;animation:writeFirst 5s linear both;background-image:url('assets/screen-solving_stop.jpg')}.writing-rest{position:absolute;inset:0;background:url('assets/screen-solving_stop.jpg') center/100% 100% no-repeat;clip-path:inset(46% 35% 3% 49%);animation:guideIn 1s 5s both;z-index:3;pointer-events:none}.lesson-clock{position:absolute;left:42%;top:1.1%;width:20%;height:4.8%;display:grid;place-items:center;background:#DDD;font-family:Arial,sans-serif;font-size:6cqw;color:black;z-index:5;pointer-events:none}.screen{container-type:inline-size}.next-day{position:absolute;inset:0;z-index:10;display:grid;place-items:center;background:white;color:#6850CC;text-align:center;font-size:clamp(20px,6cqw,30px);font-weight:800;animation:guideIn .6s both}.next-day.leaving{animation:vanish .6s forwards}.goal-link{position:absolute;left:35%;top:8%;width:25%;height:5%;display:grid;place-items:center;background:#8962FF;border-radius:30px;color:white;font-size:3.8cqw;z-index:3;pointer-events:none}
+@keyframes writeFirst{from{clip-path:inset(25% 35% 75% 49%)}to{clip-path:inset(25% 35% 54% 49%)}}
+
+.review-writing{position:absolute;inset:0;z-index:3;pointer-events:none}.review-writing svg{display:block;width:100%;height:100%}.review-writing path{fill:none;stroke:#4942BC;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:reviewStroke 1.8s .7s linear forwards}.review-writing .answer-two{animation-delay:2.5s}
+@keyframes reviewStroke{to{stroke-dashoffset:0}}@media(prefers-reduced-motion:reduce){.review-writing path{stroke-dashoffset:0}}
+.review-writing path{animation:none;stroke-dashoffset:0}.review-writing .wrong-answer{stroke:black;stroke-width:3}.review-writing .check-mark{stroke:#E83B46;stroke-width:5}.review-writing.intro .answer-three,.review-writing.intro .answer-two,.review-writing.intro .correction{visibility:hidden}.review-writing.state-writing .correction{stroke-dashoffset:1;animation:reviewStroke .2s .1s linear forwards}.review-writing.state-writing .cross-two{animation-delay:.35s}.review-writing.state-writing .cross-three{animation-delay:.6s}.review-writing.state-writing .cross-four{animation-delay:.85s}.review-writing.state-writing .answer-three{stroke-dashoffset:1;animation:reviewStroke 1.5s 1.1s linear forwards}.review-writing.state-writing .answer-two{stroke-dashoffset:1;animation:reviewStroke 1.5s 2.8s linear forwards}.hotspot.review-target{animation:guideIn .6s 1.3s both,pulse 1.4s 1.9s infinite}.finger.review-finger{animation:guideIn .6s 1.7s both,hand 1.25s 2.3s infinite}.read-highlight.review-complete{animation:guideIn .5s both,pulse 1.4s .5s infinite;background:#FF4D4F48}.review-pause{position:absolute;left:13%;top:1.2%;width:19%;height:4%;display:grid;place-items:center;background:#FAFAFA;border:1px solid #D6D6D6;border-radius:24px;color:#333;font-size:3.2cqw;z-index:5;pointer-events:none}.report-viewport{position:absolute;inset:0;z-index:2;overflow:hidden;background:white;container-type:size}.report-scroll-image{display:block;position:absolute;left:0;top:0;width:100%;height:auto;animation:reportScroll 3s .5s linear both}.report-scroll-image.finished{animation:none;transform:translateY(min(0px,calc(100cqh - 100%)))}@keyframes reportScroll{from{transform:translateY(0)}to{transform:translateY(min(0px,calc(100cqh - 100%)))}}.button-line{display:grid;grid-template-columns:64px 1fr;align-items:start;gap:8px;margin:3px 0}.app-button-example{display:inline-flex;justify-content:center;align-items:center;gap:4px;background:#FAFAFA;color:#555;border:1px solid #D7D7D7;border-radius:22px;font-size:11px;line-height:24px;white-space:nowrap}.app-button-example i{font-style:normal;color:#F44;font-size:13px}.app-button-example .submit-symbol{color:#37BF82}
+@media(prefers-reduced-motion:reduce){.review-writing path{stroke-dashoffset:0}.report-scroll-image{transform:translateY(min(0px,calc(100cqh - 100%)))}}
+.bubble-note{display:block;font-size:12px;font-weight:400;line-height:1.6;margin-top:10px}.inline-tools{display:flex;align-items:center;gap:10px;margin-bottom:8px}.inline-tools img{width:110px;height:30px;object-fit:contain}.plus-example{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:white;color:#666;font-size:24px}
+.landscape-backdrop{position:absolute;inset:-20px;z-index:-1;background-position:center;background-size:cover;filter:blur(16px) brightness(.82);pointer-events:none}
+.report-scroll-image.stationary{animation:none;transform:translateY(0)}
+.record-example{width:100px;height:26px;object-fit:contain}.start-example{width:92px;height:35px;border-radius:8px}.finger.flipped{background:none}.finger.flipped:before{content:"";position:absolute;inset:0;background:url("assets/onstudy-img_hand.png") center/contain no-repeat;transform:rotate(180deg)}
+.report-marker{position:absolute;z-index:3;background:#FFE40088;border-radius:3px;pointer-events:none;mix-blend-mode:multiply;clip-path:inset(0 100% 0 0);animation:markerDraw .85s ease-out both}@keyframes markerDraw{to{clip-path:inset(0)}}@media(prefers-reduced-motion:reduce){.report-marker{clip-path:inset(0)}}
+.finger.eraser-pointer{aspect-ratio:1;background-image:url("assets/tutorial-eraser.png");mix-blend-mode:normal;z-index:6;clip-path:polygon(42% 16%,51% 17%,79% 35%,82% 43%,60% 80%,52% 85%,44% 83%,19% 66%,17% 56%,19% 49%,38% 20%);animation:guideIn .65s .45s both,eraserTap 1.25s 1.1s infinite;transform:translate(-20%,-70%)}@keyframes eraserTap{50%{transform:translate(-20%,-55%)}}
+
+/* Keep sentence boundaries and avoid breaking Korean words in guide copy. */
+.speech,.cloud-text,.bubble-note{word-break:keep-all;overflow-wrap:normal;white-space:pre-line;text-wrap:pretty}
+.speech{font-size:clamp(15px,4.4vw,18px);line-height:1.65;padding:20px 20px 66px}
+.speech:has(.speech-arrow[hidden]){padding-bottom:22px}
+.cloud{height:auto;min-height:330px;padding:100px 11% 28px}
+.cloud-content{position:relative;inset:auto;font-size:clamp(15px,4.2vw,17px);line-height:1.65;gap:14px}
+.goal-example{width:102px;height:34px;border-radius:20px;vertical-align:middle}
+
+.cloud{background-image:url("assets/tutorial-cloud.svg");min-height:260px;padding:98px 12% 34px}
+.cloud-mask{display:none}.cloud-content{gap:18px;text-align:left;align-items:stretch}
+.cloud-text{font-size:clamp(14px,4vw,17px);line-height:1.65}
+.cloud-forward .cloud-content{padding-right:32px}
+.cloud-forward .cloud-actions{position:absolute;right:-22px;top:55%;transform:translateY(-50%)}
+.cloud-forward .cloud-actions button{display:grid;place-items:center;width:44px;height:44px;min-height:44px;padding:0;border-radius:50%;font-size:24px;animation:arrowNudge 1.25s ease-in-out infinite}
+.hero-character{bottom:calc(100% - 86px);transform:rotate(-10deg)}
+.cloud-actions{align-self:center}
+.bubble-note{white-space:normal;font-size:12px}.app-button-example{padding:0 10px;line-height:26px}
+
+.previous-overlays{position:absolute;inset:0;z-index:7;pointer-events:none}.previous-overlays *{animation:none!important;pointer-events:none!important}.record-example{width:74px;height:26px;margin:0 2px 2px;vertical-align:middle}
+
+.speech.record-guide{font-size:clamp(14px,3.9vw,16px)}.record-guide .record-example{width:64px;height:24px}.record-guide .plus-example,.record-guide .plus-example svg{width:26px;height:26px}
+
+.speech.two-line{font-size:clamp(11px,3.35vw,17px)}.cloud.two-line{padding-left:7%;padding-right:7%}.cloud.two-line .cloud-text{font-size:clamp(12px,3.6vw,16px)}.speech.two-line-map{font-size:clamp(12px,3.8vw,18px)}
+.speech-wrap{top:auto;bottom:calc(260px - var(--speech-drop,0px));margin:0}
+
+/* Captures keep their own proportions; the frame matches the supplied originals. */
+.screen{aspect-ratio:1440/2304}
+.screen-image{object-fit:contain;background:white}
+.finger{width:15%;transform:none;animation:guideIn .65s .45s both,classHand 1.25s 1.1s infinite;z-index:6}
+.finger img{display:block;width:100%;height:100%;object-fit:contain;transform:rotate(var(--finger-angle,0deg))}
+.finger{background:none}
+@keyframes classHand{50%{translate:0 -5px}}
+.browser-callout{position:absolute;left:3%;top:10%;z-index:3;padding:5px 12px;border:2px solid #8962FF;border-radius:8px;background:#FFF;color:#6650BF;font-size:4cqw;font-weight:700}
+.address-zoom{position:absolute;left:12%;top:4.5%;width:76%;height:5%;z-index:3;background:#303030;border-radius:8px;box-shadow:0 3px 10px #302B4344}
+.step-nav{grid-template-columns:44px minmax(60px,1fr) 44px}
+.speech{padding:20px 20px 22px;cursor:default}
+.speech.two-line{font-size:clamp(11px,3.35vw,14px)}
+.speech-arrow{top:50%;bottom:auto;transform:translateY(-50%);animation:none;border:0;padding:10px;line-height:1;white-space:normal}
+.speech-arrow svg{display:block;width:24px;height:24px}
+.bubble-note{font-size:clamp(11px,3.1vw,13px)}
+.tutorial-frame{padding-bottom:70px}
+.hero{bottom:70px}
+.speech-wrap{bottom:calc(70px - var(--speech-drop,0px))}
+
+
+.prep-check-item,.bubble-accent{color:#6541C4}
+.prep-check-item{font-size:max(11px,calc(1em - 2pt))}
+.speech.fixed-two-line #bubbleText{white-space:pre;text-wrap:nowrap}
+
+.control-name{color:#6541C4;font-weight:800;white-space:nowrap}
+.control-note{font-size:.75em}
+.speech.fixed-lines #bubbleText,.cloud-text.fixed-lines,.prep-check-intro{white-space:pre;text-wrap:nowrap}
+.speech[aria-disabled="false"]{cursor:pointer}
+</style>
+</head>
+<body>
+<header class="header"><img class="brand" src="assets/onstudy-bg_bi_smartk.svg" alt="스마트구몬N"></header>
+<main>
+<h2 class="scene-title" id="sceneTitle"></h2>
+<section id="appScene" class="tutorial-frame"><div class="tablet"><nav class="step-nav" aria-label="튜토리얼 이동"><button id="prevButton" class="step-arrow" aria-label="이전">◀</button><span class="step-count"><span id="progress"></span></span><button id="nextButton" class="step-arrow" aria-label="다음">▶</button></nav><div class="screen" id="screen"><div class="empty-capture" id="emptyCapture" hidden aria-label="이미지 미등록"></div><div id="landscapeBackdrop" class="landscape-backdrop" hidden></div><img class="screen-image" id="screenImage" alt=""><div id="screenOverlays"></div></div><div class="scene-meta"><span id="scope" class="scope" hidden></span><span id="timeTag" class="time-tag" hidden></span></div></div>
+<section id="hero" class="hero" hidden><div class="hero-character" id="heroCharacter"><img src="assets/onstudy-img_help_1-2.png" alt="카이"></div><div class="cloud"><div class="cloud-mask"></div><div class="cloud-content"><p class="cloud-text" id="cloudText"></p><div class="cloud-actions" id="cloudActions"></div></div></div></section>
+<div class="speech-wrap" id="speechWrap"><div class="mascot-peek"><img src="assets/onstudy-img_help_1-2.png" alt="카이"></div><div class="speech" id="speech" role="button" tabindex="0"><span id="bubbleText"></span><button type="button" class="speech-arrow" id="bubbleArrow" hidden aria-label="다음 화면"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></section>
+<div class="scene-status" id="status" role="status"></div>
+</main>
+
+
+<script type="application/json" id="screen-plan">[{"id": "title", "row": 7, "label": "화상수업 입장 방법", "bg": "home.png", "chapter": 1, "bubble": "스마트구몬 WINGS, 첫 수업 전에\n화상수업 방법을 함께 알아볼까요?", "type": "title", "next": "check", "fixedLines": true}, {"id": "check", "row": 8, "label": "수업 전 확인", "bg": "home.png", "chapter": 1, "bubble": "원활한 화상 수업을 위해\n수업 전에 두 가지만 확인해 주세요.\n① 스마트구몬N 학습 앱이 최신 버전인지\n② 와이파이 속도가 원활한지", "type": "screen", "mode": "read", "next": "wifi-entry", "fixedLines": false, "fixedIntro": true}, {"id": "wifi-entry", "row": 9, "label": "와이파이 속도 확인 방법", "bg": "wifi-entry.png", "chapter": 1, "bubble": "Wifi 속도 확인 방법을 알려드릴게요.\n인터넷 창을 열고 주소에 fast.com을 입력해주세요.", "type": "screen", "boxes": [{"l": 11.5, "t": 4.2, "w": 77, "h": 5.5}], "callout": "fast.com 입력", "addressZoom": true, "fingerAt": {"l": 81, "t": 10, "angle": 0}, "next": "wifi-result", "fixedLines": true}, {"id": "wifi-result", "row": 10, "label": "와이파이 속도 확인", "bg": "wifi-result.png", "chapter": 1, "bubble": "접속하면 자동으로 속도를 확인해 줘요.\n50~100Mbps 정도면 원활한 학습이 가능해요.", "type": "screen", "mode": "read", "note": "※ 와이파이는 공유기에 가까울수록 속도가 빨라져요.", "next": "C01", "fixedLines": false}, {"id": "C01", "row": 11, "label": "홈 메뉴 열기", "bg": "home.png", "chapter": 2, "bubble": "학습앱에서 오른쪽 위 [목록(삼선)]버튼을 눌러주세요.", "type": "screen", "boxes": [{"l": 93, "t": 1.1, "w": 5.5, "h": 3.4}], "fingerAt": {"l": 84, "t": 5.5, "angle": 35}, "next": "C02", "fixedLines": true}, {"id": "C02", "row": 12, "label": "스마트클래스 선택", "bg": "menu.png", "chapter": 2, "bubble": "메뉴에서 [스마트클래스]를 선택해주세요.", "type": "screen", "boxes": [{"l": 5, "t": 50.5, "w": 34, "h": 5.5}], "next": "C04", "fixedLines": true}, {"id": "C04", "row": 13, "label": "수업 일정 확인", "bg": "scheduled.png", "chapter": 2, "bubble": "수업이 있는 요일을 선택하면 예정된 수업 일정을\n확인할 수 있어요. 아직 수업 준비 중인 경우,\n[수업 예정]으로 나타나요.", "type": "screen", "mode": "read", "next": "refresh", "fixedLines": false}, {"id": "refresh", "row": 14, "label": "수업 목록 새로고침", "bg": "scheduled.png", "chapter": 2, "bubble": "클래스가 보이지 않거나 [수업 예정]으로\n남아 있다면, [새로고침] 버튼을 눌러 주세요.", "type": "screen", "boxes": [{"l": 90.5, "t": 58, "w": 6, "h": 3.8}], "next": "C05", "fixedLines": false}, {"id": "C05", "row": 15, "label": "선생님이 수업을 연 뒤 입장", "bg": "entry.png", "chapter": 2, "bubble": "수업 준비가 완료되면 [입장]으로 바뀌어요.\n[입장]버튼을 누르면 수업에 입장할 수 있어요.", "type": "screen", "boxes": [{"l": 75, "t": 65.2, "w": 20, "h": 4.8}], "fingerAbove": true, "next": "C06", "fixedLines": false}, {"id": "C06", "row": 16, "label": "선생님 연결", "bg": "class-main.png", "chapter": 3, "bubble": "수업 입장이 완료되었어요.\n선생님과 즐거운 수업 시작!", "type": "screen", "mode": "read", "bubbleDelay": 1000, "next": "C07", "fixedLines": false}, {"id": "C07", "row": 17, "label": "수업 종료", "bg": "completed.png", "chapter": 3, "bubble": "수업이 끝나면 [수업완료]로 바뀌어요. 수업완료\n버튼을 클릭하면, 수업 내용을 간략히 확인할 수 있어요.", "type": "screen", "mode": "read", "next": "end", "fixedLines": true}, {"id": "end", "row": 18, "label": "안내 완료", "bg": "home.png", "chapter": 3, "bubble": "화상 수업 준비도 완료! 선생님과의\n즐거운 첫 수업 되시길 바랄게요~!", "type": "end", "next": null, "fixedLines": true}]</script><script>'use strict';
+const PLAN=JSON.parse(document.getElementById('screen-plan').textContent);
+const $=id=>document.getElementById(id);
+let index=0,history=[],lastBackground=null;
+function current(){return PLAN[index];}
+function reduceMotion(){return matchMedia('(prefers-reduced-motion: reduce)').matches;}
+function fade(el,frames,duration=650,delay=0){
+ el.getAnimations().forEach(a=>a.cancel());
+ if(!reduceMotion())el.animate(frames,{duration,delay,easing:'ease-in-out',fill:'both'});
+}
+function go(id){
+ const next=PLAN.findIndex(s=>s.id===id);if(next<0)return;
+ history.push(index);index=next;render();
+}
+function advance(){if(current().type==='end')restart();else if(current().next)go(current().next);}
+function previous(){if(history.length){index=history.pop();render();}}
+function restart(){index=0;history=[];render();}
+function rect(el,b){Object.assign(el.style,{left:b.l+'%',top:b.t+'%',width:b.w+'%',height:b.h+'%'});}
+function paintBackground(s){
+ const img=$('screenImage'),old=$('previousImage');
+ if(s.bg!==lastBackground){
+  old.hidden=!lastBackground;
+  if(lastBackground){old.src='assets/'+lastBackground;fade(old,[{opacity:1},{opacity:0}],600);}
+  fade(img,[{opacity:0},{opacity:1}],600);
+ }
+ img.src='assets/'+s.bg;img.alt=s.label+' 예시 화면';img.hidden=false;
+ $('emptyCapture').hidden=true;lastBackground=s.bg;
+}
+function overlays(s){
+ const layer=$('screenOverlays');layer.getAnimations().forEach(a=>a.cancel());layer.replaceChildren();
+ if(s.addressZoom){const zoom=document.createElementNS('http://www.w3.org/2000/svg','svg');zoom.setAttribute('viewBox','200 77 545 54');zoom.classList.add('address-zoom');const image=document.createElementNS('http://www.w3.org/2000/svg','image');image.setAttribute('href','assets/'+s.bg);image.setAttribute('width','992');image.setAttribute('height','1586');zoom.append(image);layer.append(zoom);}
+ if(s.callout){const tip=document.createElement('div');tip.className='browser-callout';tip.textContent=s.callout;layer.append(tip);}
+ for(const b of s.boxes||[]){
+  const read=s.mode==='read',target=document.createElement(read?'div':'button');
+  target.className=read?'read-highlight':'hotspot';rect(target,b);
+  if(!read){target.type='button';target.setAttribute('aria-label',s.label+' 강조 영역 누르기');target.addEventListener('click',advance);}
+  layer.append(target);
+  if(!read){
+   const hand=document.createElement('div');hand.className='finger';hand.setAttribute('aria-hidden','true');
+   const below=b.t+b.h+1,above=b.t-11;
+   const at=s.fingerAt||{l:Math.min(85,Math.max(0,b.l+b.w/2-4.4)),t:s.fingerAbove?Math.max(0,above):below,angle:s.fingerAbove?180:0};
+   Object.assign(hand.style,{left:at.l+'%',top:at.t+'%'});hand.style.setProperty('--finger-angle',(at.angle||0)+'deg');
+   const image=document.createElement('img');image.src='assets/onstudy-img_hand.png';image.alt='';hand.append(image);layer.append(hand);
+  }
+ }
+ if(s.addressZoom)fade(layer,[{opacity:0},{opacity:1}],350,600);
+}
+function cloudButton(label,fn,secondary=false){
+ const button=document.createElement('button');button.type='button';button.textContent=label;
+ if(secondary)button.className='secondary';button.addEventListener('click',fn);$('cloudActions').append(button);
+}
+function renderBubble(s){
+ const text=$('bubbleText');text.replaceChildren();let cursor=0;
+ if(s.id==='check'){
+  const lines=s.bubble.split('\n'),intro=document.createElement('span');intro.className='prep-check-intro';intro.textContent=lines.slice(0,2).join('\n');text.append(intro);
+  for(const line of lines.slice(2)){text.append('\n');const item=document.createElement('span');item.className='prep-check-item';item.textContent=line;text.append(item);}return;
+ }
+ for(const match of s.bubble.matchAll(/\[([^\]]+)\]|fast\.com|50~100Mbps/g)){
+  text.append(s.bubble.slice(cursor,match.index));cursor=match.index+match[0].length;
+  const span=document.createElement('span');
+  if(!match[1]){span.className='bubble-accent';span.textContent=match[0];}
+  else{
+   span.className='control-name';
+   if(match[1]==='목록(삼선)'){span.append('[목록');const small=document.createElement('span');small.className='control-note';small.textContent='(삼선)';span.append(small,']');}
+   else span.textContent=match[0];
+  }
+  text.append(span);
+ }
+ text.append(s.bubble.slice(cursor));
+}
+function fitSpeechText(){
+ if(!$('hero').hidden){
+  const text=$('cloudText');if(!text.classList.contains('fixed-lines'))return;
+  const available=document.querySelector('.cloud-content').clientWidth;let font=parseFloat(getComputedStyle(text).fontSize);
+  while(font>10&&text.scrollWidth>available+.5){font=Math.max(10,font-.25);text.style.fontSize=font+'px';}return;
+ }
+ const speech=$('speech'),text=$('bubbleText'),arrow=$('bubbleArrow');
+ if($('speechWrap').hidden)return;
+ if(arrow.dataset.autoHidden==='true'){arrow.hidden=false;delete arrow.dataset.autoHidden;}
+ const available=speech.clientWidth-parseFloat(getComputedStyle(speech).paddingLeft)-parseFloat(getComputedStyle(speech).paddingRight);
+ const fixed=speech.classList.contains('fixed-lines')?text:text.querySelector('.prep-check-intro');
+ if(fixed){let font=parseFloat(getComputedStyle(speech).fontSize);while(font>10&&fixed.getBoundingClientRect().width>available){font=Math.max(10,font-.25);speech.style.fontSize=font+'px';}}
+ if(arrow.hidden)return;
+ const overlaps=()=>{const button=arrow.getBoundingClientRect(),range=document.createRange(),walker=document.createTreeWalker(text,NodeFilter.SHOW_TEXT);while(walker.nextNode()){range.selectNodeContents(walker.currentNode);if([...range.getClientRects()].some(r=>r.width&&r.height&&r.left<button.right&&r.right>button.left&&r.top<button.bottom&&r.bottom>button.top))return true;}return false;};
+ let font=parseFloat(getComputedStyle(speech).fontSize);while(font>11&&overlaps()){font=Math.max(11,font-.25);speech.style.fontSize=font+'px';}
+ if(overlaps()){arrow.hidden=true;arrow.dataset.autoHidden='true';}
+}
+
+function positionSpeech(){
+ fitSpeechText();
+ const wrap=$('speechWrap');wrap.style.setProperty('--speech-drop','0px');if(wrap.hidden)return;
+ const shift=wrap.getBoundingClientRect().top-$('appScene').getBoundingClientRect().top-wrap.offsetTop;
+ const guides=[$('speech'),wrap.querySelector('.mascot-peek')].map(el=>{const b=el.getBoundingClientRect();return {...b.toJSON(),top:b.top-shift,bottom:b.bottom-shift};});let drop=0;
+ for(const target of $('screenOverlays').querySelectorAll('.hotspot,.read-highlight')){
+  const box=target.getBoundingClientRect();
+  for(const guide of guides)if(box.left<guide.right&&box.right>guide.left&&box.top<guide.bottom&&box.bottom>guide.top)drop=Math.max(drop,box.bottom+12-guide.top);
+ }
+ wrap.style.setProperty('--speech-drop',drop+'px');
+}
+function render(){
+ const s=current(),hero=s.type==='title'||s.type==='end',touch=(s.boxes||[]).length>0&&s.mode!=='read';
+ $('appScene').dataset.state=s.id;$('sceneTitle').textContent=s.label;$('progress').textContent=s.type==='end'?'완료':`PART ${s.chapter}/3`;
+ $('scope').hidden=true;$('timeTag').hidden=true;$('status').textContent='';
+ $('prevButton').disabled=!history.length;
+ $('nextButton').setAttribute('aria-label',s.type==='end'?'다시 보기':s.type==='title'?'시작하기':'다음');
+ $('hero').hidden=!hero;$('speechWrap').hidden=hero;
+ paintBackground(s);
+ if(hero){
+  $('screenOverlays').replaceChildren();$('heroCharacter').hidden=false;
+  document.querySelector('.cloud').className='cloud';$('cloudText').style.removeProperty('font-size');$('cloudText').classList.toggle('fixed-lines',!!s.fixedLines);$('cloudText').textContent=s.bubble;$('cloudActions').replaceChildren();
+  if(s.type==='title')cloudButton('시작하기',advance);
+  else cloudButton('다시 보기',restart);
+ }else{
+  overlays(s);$('speech').style.removeProperty('font-size');$('speech').className='speech'+(['C04','C05','C07','wifi-entry'].includes(s.id)?' two-line':'')+(s.fixedLines?' fixed-lines':'');renderBubble(s);$('speech').setAttribute('aria-disabled',String(touch));
+  if(s.note){const note=document.createElement('small');note.className='bubble-note';note.textContent=s.note;$('bubbleText').append(note);}
+  $('bubbleArrow').hidden=touch;
+ }
+ positionSpeech();fade(hero?$('hero'):$('speechWrap'),[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],750,s.bubbleDelay||0);
+}
+$('bubbleArrow').addEventListener('click',e=>{e.stopPropagation();advance();});
+$('speech').addEventListener('click',e=>{if(!e.target.closest('button')&&$('speech').getAttribute('aria-disabled')==='false')advance();});
+$('speech').addEventListener('keydown',e=>{if(e.target===$('speech')&&(e.key==='Enter'||e.key===' ')&&$('speech').getAttribute('aria-disabled')==='false'){e.preventDefault();advance();}});
+$('prevButton').addEventListener('click',previous);$('nextButton').addEventListener('click',advance);
+const old=document.createElement('img');old.id='previousImage';old.className='screen-image previous-image';old.alt='';old.hidden=true;$('screen').append(old);
+for(const bg of new Set(PLAN.map(s=>s.bg))){const image=new Image();image.src='assets/'+bg;}
+render();
+const layoutObserver=new ResizeObserver(positionSpeech);layoutObserver.observe($('speech'));layoutObserver.observe(document.querySelector('.tablet'));
+window.addEventListener('resize',()=>{$('speech').style.removeProperty('font-size');$('cloudText').style.removeProperty('font-size');positionSpeech();});
+document.fonts.ready.then(()=>{$('speech').style.removeProperty('font-size');$('cloudText').style.removeProperty('font-size');positionSpeech();});
+</script></body></html>
