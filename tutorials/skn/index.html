@@ -214,7 +214,7 @@ function fitGuideText(){
 }
 
 let guideTimer=null,guideGeneration=0,guideExitStarted=false;
-function clearGuideMotion(){clearTimeout(guideTimer);guideGeneration++;guideExitStarted=false;$('screenOverlays').inert=false;}
+function clearGuideMotion(){$('speechWrap').getAnimations().forEach(a=>a.cancel());clearTimeout(guideTimer);guideGeneration++;guideExitStarted=false;$('screenOverlays').inert=false;}
 function positionSpeech(){
  fitGuideText();const wrap=$('speechWrap');wrap.style.setProperty('--speech-drop','0px');if(wrap.hidden||guideExitStarted)return;
  const note=wrap.querySelector('.bubble-note');if(note){note.style.whiteSpace='pre';note.style.fontSize='12px';while(note.scrollWidth>note.clientWidth&&parseFloat(note.style.fontSize)>8)note.style.fontSize=(parseFloat(note.style.fontSize)-.25)+'px';}
