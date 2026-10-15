@@ -47,3 +47,7 @@ body.product-intro-active>header,body.product-intro-active>main{display:none}
 .intro-art.sprite .intro-decoration img{width:348.28%;height:auto;max-width:none}
 .intro-decoration.one{left:-2%;top:15%}.intro-decoration.two{right:-3%;top:3%;transform:rotate(15deg)}.intro-decoration.three{right:5%;bottom:-5%;transform:rotate(-10deg);width:clamp(220px,30vw,400px)}
 @media(max-width:480px){.product-intro{padding:52px 20px 34px}.intro-tagline{margin-bottom:26px;font-size:13px}.product-intro #introBrand{font-size:clamp(30px,8vw,39px);margin-bottom:32px}.intro-welcome{font-size:clamp(18px,5.2vw,24px)}.intro-decoration{filter:blur(10px);opacity:.12}}
+
+.product-intro.poster-intro{padding:16px 0;background:#8962ff}.poster-intro .intro-content{width:100%;gap:12px}.intro-poster{display:block;width:100%;max-height:calc(100svh - 84px);object-fit:contain}.poster-intro button{min-height:36px;font-size:12px;padding:6px 18px}
+
+.intro-poster-frame{position:relative;width:100%;line-height:0}.intro-original-header{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;clip-path:inset(0 0 35% 0)}

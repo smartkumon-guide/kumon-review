@@ -1,5 +1,5 @@
 (() => {
-  let page, tagline, brand, welcome, next, art;
+  let page, tagline, brand, welcome, next, art, poster, posterFrame, originalHeader;
   function create() {
     page = document.createElement('section');
     page.className = 'product-intro'; page.hidden = true;
@@ -15,7 +15,7 @@
     welcome = document.createElement('p'); welcome.className = 'intro-welcome';
     next = document.createElement('button'); next.type = 'button'; next.textContent = '다음 →';
     next.setAttribute('aria-label', '튜토리얼 첫 화면으로 이동');
-    content.append(tagline, brand, welcome, next); page.append(art, content); document.body.prepend(page);
+    posterFrame=document.createElement('div');posterFrame.className='intro-poster-frame';poster=document.createElement('img');poster.className='intro-poster';originalHeader=document.createElement('img');originalHeader.className='intro-original-header';originalHeader.alt='';originalHeader.hidden=true;posterFrame.append(poster,originalHeader);posterFrame.hidden=true;content.append(posterFrame,tagline, brand, welcome, next); page.append(art, content); document.body.prepend(page);
   }
   window.TutorialIntro = {
     render(scene, frame, onContinue) {
@@ -27,6 +27,7 @@
         return false;
       }
       frame.dataset.state = scene.id;
+      page.classList.toggle('poster-intro',!!scene.poster);posterFrame.hidden=!scene.poster;originalHeader.hidden=!scene.originalHeader;if(scene.originalHeader)originalHeader.src=scene.originalHeader;tagline.hidden=brand.hidden=welcome.hidden=!!scene.poster;art.hidden=!!scene.poster;if(scene.poster){poster.src=scene.poster;poster.alt=scene.brand+' · '+scene.welcome.join(' ');}
       tagline.textContent = scene.tagline; brand.textContent = scene.brand;
       welcome.replaceChildren();
       for (const text of scene.welcome) {
