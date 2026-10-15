@@ -114,7 +114,7 @@ function route() {
   document.title = $('pageTitle').textContent;
   $('memoHeading').title = page?.label || '전체 구성에 대한 의견';
   $('legacyMemos').hidden = true; $('currentMemos').hidden = true;
-  $('previewFrame').src = page ? page.path + '?review=2' : 'about:blank';
+  $('previewFrame').src = page ? page.path + '?review=2&revision=20261015-v9-final' : 'about:blank';
   $('previewFrame').title = page?.label || '선택한 페이지';
   $('memoList').replaceChildren(); $('memoCount').textContent = ''; $('older').hidden = true;
   $('memoText').value = ''; $('send').disabled = true; $('memoText').disabled = true; status('');
