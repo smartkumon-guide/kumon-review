@@ -74,11 +74,12 @@ function loadDraft() {
   pendingId = draft?.id || null; pendingBody = draft?.pendingBody || '';
 }
 $('memoText').addEventListener('input', () => { pendingId = null; pendingBody = ''; saveDraft(); });
-function setView(mode) {
+function setView(mode, remember = true) {
+  mode = activePage && mode === 'mobile' ? 'mobile' : 'desktop';
   document.querySelector('.preview').classList.toggle('mobile-view', mode === 'mobile');
   $('desktop').setAttribute('aria-pressed', String(mode === 'desktop'));
   $('mobile').setAttribute('aria-pressed', String(mode === 'mobile'));
-  try { localStorage.setItem('kumon-review-view-v1', mode); } catch {}
+  if (remember && activePage) { try { localStorage.setItem('kumon-review-view-v1', mode); } catch {} }
 }
 $('desktop').addEventListener('click', () => setView('desktop'));
 $('mobile').addEventListener('click', () => setView('mobile'));
@@ -101,6 +102,9 @@ function route() {
   const page = pages.find(p => p.id === requested && p.active);
   const token = ++routeVersion;
   activePage = page || null; sceneContext = null; contextReady = false; viewingLegacy = false;
+  document.querySelector('.view-toggle').hidden = !page;
+  let mode = 'desktop'; try { mode = localStorage.getItem('kumon-review-view-v1') || 'desktop'; } catch {}
+  setView(mode, false);
   pageId = requested || 'hub';
   limit = 50; loadVersion++; fetching = false;
   $('hub').hidden = !!requested;
@@ -232,8 +236,7 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) refr
 setInterval(() => { if (started && !document.hidden) refresh(); }, 10000);
 function start() {
   started = true; $('app').hidden = false; $('authorLabel').textContent = name;
-  let mode = 'desktop'; try { mode = localStorage.getItem('kumon-review-view-v1') || 'desktop'; } catch {}
-  setView(mode); route();
+  route();
 }
 try {
   const response = await fetch('pages.json', {cache: 'no-store'});

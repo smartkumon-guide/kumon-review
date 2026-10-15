@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>구몬 안내·튜토리얼 검토</title><link rel="stylesheet" href="review.css?v=2"></head>
+<title>구몬 안내·튜토리얼 검토</title><link rel="stylesheet" href="review.css?v=3"></head>
 <body>
 <div id="app" hidden>
  <header class="topbar">
   <a class="home" href="index.html" aria-label="메인으로 이동">메인으로 이동</a>
   <h1 id="pageTitle">구몬 안내·튜토리얼 검토</h1>
-  <div class="view-toggle" aria-label="화면 보기 방식">
+  <div class="view-toggle" hidden aria-label="화면 보기 방식">
    <button id="desktop" type="button" aria-pressed="true">PC 버전</button>
    <button id="mobile" type="button" aria-pressed="false">모바일 버전</button>
   </div>
@@ -15,7 +15,7 @@
  <main class="workspace">
   <section class="preview" aria-label="페이지 미리보기">
    <div id="hub" class="hub">
-    <div class="hub-heading"><p class="eyebrow">KUMON · REVIEW</p><h2>페이지를 선택해 주세요.</h2><p>상품별 안내와 튜토리얼을 확인하고, 페이지별로 의견을 남겨주세요.</p></div>
+    <div class="hub-heading"><h2>페이지를 선택해 주세요.</h2><p>상품별 안내와 튜토리얼을 확인하고, 페이지별로 의견을 남겨주세요.</p></div>
     <div id="pageTables"></div>
    </div>
    <div id="frameWrap" hidden><iframe id="previewFrame" title="선택한 페이지" src="about:blank"></iframe></div>
@@ -23,7 +23,7 @@
   </section>
   <aside id="memoPane" class="memo-pane" aria-label="페이지별 메모">
    <div class="memo-head">
-    <div class="memo-top"><span class="eyebrow">FEEDBACK</span><div class="identity"><span id="authorLabel"></span><button id="changeName" type="button">이름 변경</button></div></div>
+    <div class="memo-top"><div class="identity"><span id="authorLabel"></span><button id="changeName" type="button">이름 변경</button></div></div>
     <div class="memo-title"><h2 id="memoHeading">페이지 메모 <span id="memoCount"></span></h2><div class="context-actions"><button id="legacyMemos" type="button" hidden>기존 메모</button><button id="currentMemos" type="button" hidden>현재 화면</button><button id="closeMemo" type="button" aria-label="메모 닫기">닫기</button></div></div>
    </div>
    <p id="memoStatus" class="status" role="status" aria-live="polite" hidden></p>
@@ -37,8 +37,8 @@
  </main>
 </div>
 <dialog id="nameDialog" aria-labelledby="nameTitle">
- <form id="nameForm"><p class="eyebrow">KUMON · REVIEW</p><h2 id="nameTitle">이름을 입력해 주세요.</h2><p>남긴 의견에 표시됩니다.<br>팀명과 이름을 함께 적어도 좋아요.</p><label for="nameInput">작성자 이름</label><input id="nameInput" name="name" maxlength="40" autocomplete="name" required placeholder="예: 온라인사업팀 홍길동"><p id="nameError" role="alert"></p><div class="name-actions"><button id="cancelName" type="button" hidden>취소</button><button type="submit">페이지 확인하기</button></div></form>
+ <form id="nameForm"><h2 id="nameTitle">이름을 입력해 주세요.</h2><p>남긴 의견에 표시됩니다.<br>팀명과 이름을 함께 적어도 좋아요.</p><label for="nameInput">작성자 이름</label><input id="nameInput" name="name" maxlength="40" autocomplete="name" required placeholder="예: 온라인사업팀 홍길동"><p id="nameError" role="alert"></p><div class="name-actions"><button id="cancelName" type="button" hidden>취소</button><button type="submit">페이지 확인하기</button></div></form>
 </dialog>
 <noscript>페이지 확인과 메모 기능을 사용하려면 JavaScript를 허용해 주세요.</noscript>
-<script type="module" src="review.js?v=2"></script>
+<script type="module" src="review.js?v=3"></script>
 </body></html>
