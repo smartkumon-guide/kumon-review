@@ -1,0 +1,49 @@
+:root{
+  --theme-main:#147fa8;--theme-deep:#0b6489;--theme-edge:#7dc4e0;
+  --theme-page:#e8f5fb;--theme-bubble:#cdebf7;--theme-ink:#193e50;
+  --theme-focus:rgb(20 127 168 / .16);--theme-pulse:rgb(20 127 168 / .3);
+  --theme-intro:#0d7099;--theme-intro-light:#319fc3;
+  --pink:var(--theme-page);--purple:var(--theme-main);--yellow:var(--theme-bubble);
+  --sky:var(--theme-bubble);--accent:var(--theme-main);--edge:var(--theme-edge);--ink:var(--theme-ink);
+}
+body[data-tutorial-theme="mint"]{
+  --theme-main:#087d70;--theme-deep:#056357;--theme-edge:#79c8b7;
+  --theme-page:#e8f6f1;--theme-bubble:#cdeee3;--theme-ink:#19463e;
+  --theme-focus:rgb(8 125 112 / .16);--theme-pulse:rgb(8 125 112 / .3);
+  --theme-intro:#08695e;--theme-intro-light:#299f8c;
+}
+body[data-tutorial-theme]{--pink:var(--theme-page);--purple:var(--theme-main);--yellow:var(--theme-bubble);--sky:var(--theme-bubble);--accent:var(--theme-main);--edge:var(--theme-edge);--ink:var(--theme-ink);background:var(--theme-page);color:var(--theme-ink)}
+body[data-tutorial-theme]::before{background:radial-gradient(circle at 16% 22%,var(--theme-focus) 0 9%,transparent 10%),radial-gradient(circle at 85% 32%,var(--theme-focus) 0 8%,transparent 9%),linear-gradient(0deg,var(--theme-bubble) 0,transparent 24%)}
+[data-tutorial-theme] .tablet,[data-tutorial-theme] .phone{background:var(--theme-main);border-color:var(--theme-edge);box-shadow:0 7px 0 var(--theme-deep),0 15px 30px rgb(20 70 85 / .13)}
+[data-tutorial-theme] .step-nav{background:var(--theme-main)}
+[data-tutorial-theme] .speech,[data-tutorial-theme] .bubble{background:var(--theme-bubble);color:var(--theme-ink);box-shadow:0 6px 0 var(--theme-edge)}
+[data-tutorial-theme] .speech-arrow,[data-tutorial-theme] .forward,[data-tutorial-theme] .cloud-actions button,[data-tutorial-theme] .actions button{background:var(--theme-main);color:#fff}
+[data-tutorial-theme] .cloud-actions .secondary,[data-tutorial-theme] .actions .secondary{background:#fffffff0;color:var(--theme-deep)}
+[data-tutorial-theme] .control-name,[data-tutorial-theme] .hero-next{color:var(--theme-deep)}
+[data-tutorial-theme] .report-marker{background:var(--theme-pulse)}
+[data-tutorial-theme] dialog{border-color:var(--theme-edge);background:var(--theme-page)}
+[data-tutorial-theme] .close{background:var(--theme-bubble);color:var(--theme-ink)}
+[data-tutorial-theme] .chapter-list button,[data-tutorial-theme] .chapters button{border-color:var(--theme-edge)}
+[data-tutorial-theme] .hotspot,[data-tutorial-theme] .highlight,[data-tutorial-theme] .read-highlight,[data-tutorial-theme] .read-highlight.review-complete{border-color:var(--theme-main);background:var(--theme-focus)}
+@keyframes pulse{50%{background:var(--theme-pulse)}}
+@keyframes submitPulse{0%,100%{opacity:.25;background:var(--theme-focus)}50%{opacity:1;background:var(--theme-pulse)}}
+@keyframes arrowNudge{50%{transform:translateX(4px);box-shadow:0 0 0 5px var(--theme-focus)}}
+[data-tutorial-theme] .cloud{background:none;isolation:isolate}
+[data-tutorial-theme] .cloud::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--theme-bubble);mask:url('tutorials/skn/assets/onstudy-img_intro_bubble.png') center/100% 100% no-repeat}
+[data-tutorial-theme] .cloud-mask{background:transparent}
+[data-tutorial-theme] .cloud-content{color:var(--theme-ink)}
+body.product-intro-active>header,body.product-intro-active>main{display:none}
+.product-intro{position:relative;isolation:isolate;min-height:100svh;padding:70px 24px 42px;display:grid;place-items:center;overflow:hidden;background:linear-gradient(125deg,var(--theme-intro-light),var(--theme-intro));color:#fff;text-align:center;font-family:'Noto Sans KR',Arial,sans-serif;box-sizing:border-box}
+.intro-content{position:relative;z-index:1;width:min(100%,900px);display:flex;flex-direction:column;align-items:center}
+.intro-tagline{max-width:100%;margin:0 0 24px;padding:9px 0;border-block:1px solid #ffffffa8;color:#fff;font-size:clamp(13px,1.7vw,23px);line-height:1.65;word-break:keep-all;overflow-wrap:anywhere}
+.product-intro #introBrand{margin:0 0 40px;color:#fff;font-size:clamp(32px,7vw,86px);font-weight:900;line-height:1.25;letter-spacing:-.055em;word-break:keep-all;max-width:100%}
+.intro-welcome{margin:0 0 34px;font-size:clamp(20px,3vw,36px);font-weight:500;line-height:1.55;letter-spacing:-.035em;color:#fff}
+.intro-welcome span{display:block}
+.product-intro button{min-height:48px;padding:10px 26px;border:1px solid #ffffffb0;border-radius:999px;background:#ffffffed;color:var(--theme-deep);font:700 15px/1.5 'Noto Sans KR',Arial,sans-serif;cursor:pointer;box-shadow:none}
+.product-intro button:hover{background:#fff}.product-intro button:focus-visible{outline:3px solid #fff;outline-offset:5px}
+.intro-art{position:absolute;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle at 10% 12%,#ffffff32 0,transparent 22%),radial-gradient(circle at 84% 88%,#b9e9da3b 0,transparent 32%)}
+.intro-decoration{position:absolute;width:clamp(150px,22vw,310px);aspect-ratio:1;overflow:hidden;opacity:.15;filter:blur(12px);transform:rotate(-15deg)}
+.intro-decoration img{display:block;width:100%;height:100%;object-fit:contain}
+.intro-art.sprite .intro-decoration img{width:348.28%;height:auto;max-width:none}
+.intro-decoration.one{left:-2%;top:15%}.intro-decoration.two{right:-3%;top:3%;transform:rotate(15deg)}.intro-decoration.three{right:5%;bottom:-5%;transform:rotate(-10deg);width:clamp(220px,30vw,400px)}
+@media(max-width:480px){.product-intro{padding:52px 20px 34px}.intro-tagline{margin-bottom:26px;font-size:13px}.product-intro #introBrand{font-size:clamp(30px,8vw,39px);margin-bottom:32px}.intro-welcome{font-size:clamp(18px,5.2vw,24px)}.intro-decoration{filter:blur(10px);opacity:.12}}
